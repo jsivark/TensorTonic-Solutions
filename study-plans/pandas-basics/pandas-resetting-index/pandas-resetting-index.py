@@ -9,9 +9,9 @@ def reset_index_demo(data, index_col):
     df = df.set_index(index_col)
 
     columns_before_reset = df.columns.tolist()
-    
+
     df = df.reset_index()
 
     columns_after_reset = df.columns.tolist()
 
-    return [columns_before_reset, columns_after_reset]
+    return [columns_before_reset,columns_after_reset]
