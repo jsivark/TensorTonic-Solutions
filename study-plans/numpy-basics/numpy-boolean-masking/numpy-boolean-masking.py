@@ -1,14 +1,14 @@
 import numpy as np
 
 def row_summary(data: list, threshold: float) -> np.ndarray:
-    x = np.asarray(data, dtype=np.float64)
-    mask = x > threshold
-
-    out = np.empty((3,) + x.shape)                               # one allocation
-    out[0] = mask                                                # bool → 1.0/0.0 automatically
-    np.multiply(x, mask.any(axis=1, keepdims=True), out=out[1])
-    np.multiply(x, mask.all(axis=1, keepdims=True), out=out[2])
-    return out
+    mask, any_l, all_l = [], [], []
+    for row in data:
+        m = [1.0 if v > threshold else 0.0 for v in row]
+        zeros = [0.0] * len(row)
+        mask.append(m)
+        any_l.append(row if 1.0 in m else zeros)
+        all_l.append(row if 0.0 not in m else zeros)
+    return np.array([mask, any_l, all_l], dtype=np.float64)
     
     
     
