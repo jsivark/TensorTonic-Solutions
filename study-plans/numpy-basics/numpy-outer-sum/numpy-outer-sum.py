@@ -6,6 +6,6 @@ def outer_sum(a: list, b: list) -> np.ndarray:
     """
     a = np.asarray(a, dtype=np.float64)
     b = np.asarray(b, dtype=np.float64)
-    return np.add.outer(a,b)
+    return a[:,np.newaxis] + b[np.newaxis,:]
     
     
